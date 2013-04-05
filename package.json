@@ -1,0 +1,32 @@
+{
+	"name": "eslinker",
+	"version": "0.0.0",
+	"description": "Combines ECMAScript programs.",
+	"readmeFilename": "README.md",
+	"keywords": [],
+	"author": "chick307",
+	"license": "MIT",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/chick307/eslinker.git"
+	},
+	"bin": {
+		"eslinker": "bin/eslinker.js"
+	},
+	"scripts": {
+		"test": "grunt test --verbose"
+	},
+	"dependencies": {
+		"esprima": "~1.0.2",
+		"estraverse": "~1.1.0",
+		"escodegen": "~0.0.17",
+		"resolve": "~0.3.1",
+		"argparse": "~0.1.12"
+	},
+	"devDependencies": {
+		"mocha": "~1.9.0",
+		"grunt": "~0.4.1",
+		"grunt-contrib-watch": "~0.3.1"
+	}
+}
