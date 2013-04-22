@@ -13,7 +13,13 @@ module.exports = (grunt) ->
 
 		watch:
 			eslinker:
-				files: ['lib/**/*.js', 'test/eslinker-test.js']
+				files: [
+					'index.js'
+					'lib/eslinker.js'
+					'lib/linked-module.js'
+					'lib/module.js'
+					'test/eslinker-test.js'
+				]
 				tasks: ['mocha:eslinker']
 			ast:
 				files: ['lib/ast.js', 'test/ast-test.js']
