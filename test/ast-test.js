@@ -5,10 +5,12 @@
  * http://opensource.org/licenses/mit-license
  */
 
+var vm = require('vm');
 var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var esprima = require('esprima');
+var escodegen = require('escodegen');
 
 describe('ast', function() {
 	var ast;
@@ -103,6 +105,32 @@ describe('ast', function() {
 				var actual = ast.getRequiredPath(d.argument);
 				assert.strictEqual(actual, d.expected);
 			});
+		});
+	});
+
+	describe('.wrap', function() {
+		it('(astNode) => wrappedAstNode', function() {
+			var astNode = {
+				type: 'Program',
+				body: [
+					{
+						type: 'VariableDeclaration',
+						kind: 'var',
+						declarations: [
+							{
+								type: 'VariableDeclarator',
+								id: {type: 'Identifier', name: 'a'},
+								init: {type: 'Literal', value: 100}
+							}
+						]
+					}
+				]
+			};
+			var wrappedAstNode = ast.wrap(astNode);
+			var code = escodegen.generate(wrappedAstNode);
+			var context = vm.createContext({a: 0});
+			vm.runInContext(code, context);
+			assert.strictEqual(context.a, 0);
 		});
 	});
 });

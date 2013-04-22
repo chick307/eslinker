@@ -16,6 +16,7 @@ var LinkedModule = require('..').LinkedModule;
 var load = require('..').load;
 var loadMain = require('..').loadMain;
 var autoLink = require('..').autoLink;
+var wrap = require('..').wrap;
 
 
 function main(argv) {
@@ -65,29 +66,6 @@ function main(argv) {
 	}
 
 	process.exit(0);
-}
-
-
-function wrap(programNode) {
-	programNode.body = (function(body) {
-		return [{
-			type: 'ExpressionStatement',
-			expression: {
-				type: 'CallExpression',
-				callee: {
-					type: 'FunctionExpression',
-					id: null,
-					params: [],
-					body: {
-						type: 'BlockStatement',
-						body: body
-					}
-				},
-				arguments: []
-			}
-		}];
-	}(programNode.body));
-	return programNode;
 }
 
 
